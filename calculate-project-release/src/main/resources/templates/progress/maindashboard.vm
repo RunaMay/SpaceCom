@@ -1,0 +1,289 @@
+<html>
+  <head>
+  <title>Calculate project release</title>
+  </head>
+<body>
+#set($DOLLARDOT = "$.")
+<style>
+   .progress {
+ width: 200px;   
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ position: relative;
+ padding: 3px;
+}
+
+.percent {
+ position: absolute;   
+ left: 50%;
+}
+
+.bar {
+ height: 15px;
+ background-color: green;
+ width: 0%;
+}
+    .Table
+    {
+        display: table;
+    }
+    .Title
+    {
+        display: table-caption;
+        text-align: center;
+        font-weight: bold;
+        font-size: larger;
+    }
+    .Heading
+    {
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+    }
+    .Row
+    {
+    width:1500px;
+    }
+    .Cell
+    {
+        width:500px;
+    height: 30px;
+text-align: center;    
+        display: table-cell;
+            border-bottom: thin dashed;
+            border-bottom-color: lightgrey;
+    }
+</style>
+
+<script type="text/javascript">
+
+function hide(projectName){
+ AJS.$("#show-"+projectName).css('display','');
+  AJS.$("#hide-"+projectName).css('display','none');
+ 
+                  AJS.$("#projects").find('[project="'+projectName+'"]').children().remove();
+
+                  AJS.$("#projects").find('[project="'+projectName+'"]').css("display","none");
+
+}
+
+
+
+ function calculate(projectName){
+ console.log("#show-"+projectName);
+ AJS.$("#show-"+projectName).css('display','none');
+  AJS.$("#hide-"+projectName).css('display','');
+   var data = 'projectName=' + projectName;
+            console.log(data+"===data===");
+   
+      AJS.${DOLLARDOT}ajax({
+        url: AJS.contextPath() + '/plugins/servlet/calculateServlet',
+        async: false,
+        type: 'POST',
+        data: data,
+        success: function(result){
+          console.log(result);
+          var obj = JSON.parse(result);
+         console.log(obj.issues.length+"======");
+         var response = obj.issues;
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+             var baseUrl = '$req.contextPath';
+             var projectBaseUrl = baseUrl + "/browse/";
+
+
+
+                        var h = AJS.$("<thead/>");
+                      var r =  AJS.$("<tr/>");
+ r.append(AJS.$("<th/>").text("Key"), AJS.$("<th/>").text("Summary"), AJS.$("<th/>").text("Progress"));
+
+
+             var issueBody = AJS.$("<tbody/>");
+
+for (var j = 0; j < response.length; j++) {
+
+	        	var issue = response[j];
+	        	console.log(issue.key+"------issue");
+	        		            var href = projectBaseUrl + issue.key;
+	        	
+           
+                 var span =  AJS.$('<span/>',{'class':'project-name'});
+                 var linkK = AJS.$("<a/>").attr('href', href);
+                 linkK.attr('target', "_top")
+                 .text(issue.key);
+            var c2 = AJS.$('<td/>').append(span.append(linkK));
+            
+             var c3= AJS.$('<td/>').append(AJS.$('<span/>',{'class':'project-name'})
+                 .text(issue.summary));
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 var width = issue.progress+"%";
+                 var color = "green";
+               var integer = parseInt(issue.progress);
+                 if(integer<parseInt("60")){
+                 color = 'green';
+                 }else if((integer>=parseInt("60"))&&(integer<parseInt("85"))){
+                 color = 'yellow';
+                 }else{
+				color = 'red';                 
+                 }
+                     console.log(color+"-------------===--"+integer<parseInt("60")+"-----------"+width);
+                 
+                 
+
+                 var progressF = AJS.$('<div/>', {'class':'progress'})
+                 .append(
+                 AJS.$('<span/>', {'class':'percent'}).text(project.progress), 
+                 AJS.$('<div/>', {'class':'bar'})
+                 .css('width', width).css('background-color', color)); 
+            var c4 = AJS.$('<td/>').append(progressF);
+                                 var iRow =AJS.$('<tr/>');
+                 
+                 iRow.append(c2,c3 ,c4);
+                 issueBody.append(iRow);
+                 
+                 }
+                 
+                 var issueTable = AJS.$('<table/>', {'class':' aui'}).css("width","1500px");
+console.log(issueTable+"-----"+h.append(r));
+    var t = issueTable.append(h.append(r),issueBody);
+    console.log(AJS.$("#projects").find('[project="'+projectName+'"]'));
+                  var m = AJS.$("#projects").find('[project="'+projectName+'"]').css("display","");
+                  m.append(t);
+         
+         
+        
+           
+           
+           
+           
+           
+           
+           
+           
+           
+          
+          }
+          
+          });
+ 
+ }
+			
+
+    
+  AJS.$(document).ready(function() {
+                      // <table class="project aui"><thead><tr><th></th><th>Key</th><th>Name</th></tr></thead><tbody><tr><td><span class="aui-avatar aui-avatar-xsmall"><span class="aui-avatar-inner"><img src="http://polontech-admin:2990/jira/secure/projectavatar?size=xsmall&amp;avatarId=10011"></span></span></td><td><span class="project-key aui-label">ASDF</span></td><td><span class="project-name"><a href="http://polontech-admin:2990/jira/browse/ASDF" target="_top">asdf</a></span></td></tr><tr><td><span class="aui-avatar aui-avatar-xsmall"><span class="aui-avatar-inner"><img src="http://polontech-admin:2990/jira/secure/projectavatar?size=xsmall&amp;avatarId=10011"></span></span></td><td><span class="project-key aui-label">QWER</span></td><td><span class="project-name"><a href="http://polontech-admin:2990/jira/browse/QWER" target="_top">qwer</a></span></td></tr></tbody></table></div>
+  
+  
+ AJS.${DOLLARDOT}ajax({
+                    url: AJS.contextPath()+'/rest/api/2/project',
+                success: function(response) {
+                            	console.log('got response: ' + response);
+        
+            var baseUrl = '$req.contextPath';
+             var projectBaseUrl = baseUrl + "/browse/";
+    
+
+
+                        var head = AJS.$("<div/>",{'class':'Heading Row'});
+                    //  var row =  AJS.$("<tr/>");
+ head.append(AJS.$("<div/>",{'class':'Cell'}).text("Key"),AJS.$("<div/>",{'class':'Cell'}), AJS.$("<div/>",{'class':'Cell'}).text("Name"));
+
+var projTable = AJS.$('<div/>', {'class':'project aui Table'});
+
+    projTable.append(head);
+             
+
+for (var j = 0; j < response.length; j++) {
+
+	        	var project = response[j];
+	        	console.log(project.name+"------project");
+	            var href = projectBaseUrl + project.key;
+                var avatar = AJS.$('<img/>');
+                avatar.attr('src', project.avatarUrls['16x16']);
+                var tRow =AJS.$("<div/>",{'class':'Row'});//AJS.$('<tr/>');
+                var sp1 = AJS.$('<span/>', {'class':'aui-avatar aui-avatar-xsmall'});
+                var sp2 = sp1.append('<span/>',{'class':'aui-avatar-inner'});
+                var sp3 = sp1.append(avatar)
+
+            var col1= AJS.$("<div/>",{'class':'Cell'}).append(sp3);         
+                    
+            var col2= AJS.$("<div/>",{'class':'Cell'}).append(AJS.$('<span/>',{'class':'project-key aui-label'})
+                 .text(project.key));
+                 
+                 var sp =  AJS.$('<span/>',{'class':'project-name'});
+                 var link = AJS.$("<a/>").attr('href', href);
+                 link.attr('target', "_top")
+                 .text(project.name);
+            var col3 =AJS.$("<div/>",{'class':'Cell'}).append(sp.append(link));
+            var col4 = AJS.$("<div/>",{'class':'Cell'}).append(AJS.$('<a/>', {'class':'aui-button calculate'}).attr('id','show-'+project.key).attr('onclick','calculate("'+project.key+'")').attr('calculate-project', project.key).text("Calculate"), AJS.$('<a/>', {'class':'aui-button calculate'}).css('display','none').attr('id','hide-'+project.key).attr('onclick','hide("'+project.key+'")').attr('calculate-project', project.key).text("Hide"));
+                 
+                 tRow.append(col2 ,col4,col3);
+                 var invisible= AJS.$("<div/>",{'class':'Row'}).attr('project', project.key).css('display','none');
+                 
+                 projTable.append(tRow,invisible);
+                               // projBody.append(AJS.$('<tr/>', {'project': project.key }).css('display','none').attr('colspan','4'));
+                 
+                 
+                 }
+                 
+                 
+   
+                  AJS.$("#projects").append(projTable);
+         }
+
+
+});
+
+});
+
+     </script>
+     <header class="aui-page-header">
+     <div class="aui-page-header-inner">
+         <div class="aui-page-header-main intro-header">
+             <h1>Calculate project release</h1>
+         </div>
+         
+     </div>
+
+
+ </header>
+ 
+ <div class="aui-page-panel main-panel">
+     <div class="aui-page-panel-inner">
+         <section class="aui-page-panel-item">
+             <div class="aui-group">
+                 <div class="aui-item">
+ 
+                     <div id="projects">
+                     
+                 </div>
+             </div>
+         </section>
+     </div>
+ </div>
+ 
+     </body>

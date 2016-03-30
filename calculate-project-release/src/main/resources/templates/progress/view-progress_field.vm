@@ -1,0 +1,37 @@
+
+<script type="text/javascript">
+  AJS.$(document).ready(function() {
+  AJS.$("#progress").parent().attr("class","");
+  AJS.$("#progress").next().next().remove();
+  
+var width = '$width'+"%";
+  var color = '$color';
+  AJS.$("#bar").css('width', width);
+  AJS.$("#bar").css('background-color',color);
+  });
+</script>
+<style>
+   #progress {
+ width: 200px;   
+ border: 1px solid #ccc;
+ border-radius: 3px;
+ position: relative;
+ padding: 3px;
+}
+
+#percent {
+ position: absolute;   
+ left: 50%;
+}
+
+#bar {
+ height: 15px;
+ background-color: green;
+ width: 0%;
+}
+</style>
+<div id="progress">
+    <span id="percent">$!value%</span>
+    <div id="bar"></div>
+</div>
+  <input type="text" style="display:none;" name="$customField.id" value="$!value">

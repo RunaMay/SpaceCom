@@ -1,0 +1,2 @@
+serviceClass: com.astra.notes.app.client.GreetingService
+path: 296C1413AD1EFB9F8C3B44833E0C35B3.gwt.rpc

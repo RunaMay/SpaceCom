@@ -1,0 +1,8 @@
+com\atlassian\plugins\project\PluginConstants.class
+com\atlassian\plugins\project\ProjectDashboard.class
+com\atlassian\plugins\project\PluginUtil.class
+com\atlassian\plugins\project\ProgressReleaseField.class
+com\atlassian\plugins\project\EstimatedHoursField.class
+com\atlassian\plugins\project\LoggedHoursField.class
+com\atlassian\plugins\project\CalculateServlet.class
+com\atlassian\plugins\project\ConfigActionSupport.class

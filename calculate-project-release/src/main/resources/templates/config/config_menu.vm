@@ -1,0 +1,91 @@
+<html>
+  <head>
+   
+		<title>Progress Release Config</title>	
+    
+    <meta name="decorator" content="admin" />
+  </head>
+<body>
+<div class="aui-page-panel-inner">
+<section class="aui-page-panel-content">
+<div class="tabs-pane active-pane" id="tabs-custom-fields">
+	#macro (errorcheck $errorHtml)
+	    #if($errorHtml)
+	        <div class="error">$errorHtml</div>
+	    #end
+	#end
+	<form id="submitForm" class="aui" name="configForm" method="post">
+        <input type="hidden" name="activePanel" value="configForm">
+	
+        <h3>Configure customfield to Calculate Progress Release</h3>
+        <div>
+            
+        </div>
+    
+
+	    
+	      <fieldset>
+	        <div class="field-group">
+	            <label for="progressReleaseName">Progress Release Name</label> 
+	            <input id="progressReleaseName" class="text" type="text" name="progressReleaseName" value="$progressReleaseName">
+	            <div class="description">
+	              Change the name for customfield Progress Release
+	            </div>
+	        </div>
+	    </fieldset>
+	      <fieldset>
+	        <div class="field-group">
+	            <label for="hoursLogged">Hours Logged Field Name</label> 
+	            <input id="hoursLogged" class="text" type="text" name="hoursLogged" value="$hoursLogged">
+	            <div class="description">
+	              Change the name for customfield Hours Logged
+	            </div>
+	        </div>
+	    </fieldset>
+	    
+	      <fieldset>
+	        <div class="field-group">
+	            <label for="hoursEstimated">Hours Estimated Field Name</label> 
+	            <input id="hoursEstimated" class="text" type="text" name="hoursEstimated" value="$hoursEstimated">
+	            <div class="description">
+	              Change the name for customfield Hours Estimated
+	            </div>
+	        </div>
+	    </fieldset>
+	    
+
+	    
+	    <br>
+	
+	    <div class="buttons-container">
+	        <div class="buttons">
+	            <input class="button submit" id="saveB" type="submit" value="$i18n.getText("common.words.save")">
+	            <a class="cancel" href="$req.getContextPath()/secure/config.jspa">$i18n.getText("common.forms.cancel")</a>
+	        </div>
+	    </div>
+	</form>
+</div>
+
+<script type="text/javascript">
+AJS.$("#saveB").click(function() {
+
+
+var href = AJS.contextPath() + '/secure/config.jspa?progressReleaseName=' + AJS.$("#progressReleaseName").val()+'&hoursLogged='+ AJS.$("#hoursLogged").val()+'&hoursEstimated='+ AJS.$("#hoursEstimated").val();
+
+alert(href);
+ AJS.$('#submitForm').attr("action",href);      
+   
+
+    
+		});
+	
+	AJS.$(document).ready(function() {
+        
+	});
+    
+</script>
+</section>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<atlassian-plugin key="${project.groupId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="configure.url">/secure/config.jspa</param>
+		</plugin-info>
+		
+		    <resource type="i18n" name="i18n" location="calculate-project-release"/>
+		    
+		    <!-- add our web resources -->
+		    <web-resource key="calculate-project-release-resources" name="calculate-project-release Web Resources">
+		        <dependency>com.atlassian.auiplugin:ajs</dependency>
+		        <context>atl.general</context>
+				<dependency>com.atlassian.auiplugin:jquery</dependency>
+				<dependency>com.atlassian.auiplugin:jquery-ui-other</dependency>
+				<dependency>jira.webresources:jira-global</dependency>
+				<dependency>jira.webresources:autocomplete</dependency>
+				<dependency>com.atlassian.auiplugin:aui-select2</dependency>
+				<context>atl.general</context>
+
+		        
+		        <resource type="download" name="calculate-project-release.css" location="/css/calculate-project-release.css"/>
+		        <resource type="download" name="calculate-project-release.js" location="/js/calculate-project-release.js"/>
+		        <resource type="download" name="images/" location="/images"/>
+		        <resource type="download" name="templates/progress/" location="/templates/progress"/>
+		        <resource type="download" name="templates/config/" location="/templates/config"/>
+		    
+
+		        <context>calculate-project-release</context>
+		    </web-resource>
+		
+		    
+	  <component-import key="pluginAccessor" interface="com.atlassian.plugin.PluginAccessor"/>
+	  <component-import key="pluginController" interface="com.atlassian.plugin.PluginController"/>
+	  <component-import key="txTemplate" interface="com.atlassian.sal.api.transaction.TransactionTemplate"/>
+	  <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+	  <component-import key="templateRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer"/>
+	  <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+	  <component-import key="loginUriProvider" interface="com.atlassian.sal.api.auth.LoginUriProvider" />
+	  <component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager" />
+	  <component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver" />
+
+	 <component-import key="pluginLicenseManager" interface="com.atlassian.upm.api.license.PluginLicenseManager"/>
+
+
+		
+		<component-import key="ao" name="Active Objects service"
+			interface="com.atlassian.activeobjects.external.ActiveObjects">
+			<description>Component to access Active Objects functionality from the
+				plugin</description>
+		</component-import>
+
+		
+	
+
+		<component key="tx-processor" name="Transactional Annotation Processor"
+			class="com.atlassian.activeobjects.external.TransactionalAnnotationProcessor">
+			<decription>Processes @Transactional annotations.</decription>
+		</component>
+	
+	    
+	    <webwork1 key="progress.config.action" name="Calculate Release Configuration"
+			class="java.lang.Object">
+			<actions>
+				<action
+					name="com.atlassian.plugins.project.ConfigActionSupport"
+					alias="config">
+					<view name="input">/templates/config/config_menu.vm</view>
+					<view name="error">/templates/config/config_menu.vm</view>
+				</action>
+			</actions>
+		</webwork1>
+		<web-section key="progress.release.config-section" name="Progress section"
+			location="admin_plugins_menu" weight="135">
+			<description>Progress Release plugin - Administration menu section
+			</description>
+			<label>Progress Release</label>
+			<condition
+				class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition" />
+		</web-section>
+	    
+	    <web-item key="com.atlassian.plugins.project.config.general" name="Progress Release General Configuration"
+			section="admin_plugins_menu/progress.release.config-section" weight="1">
+		<label>Project Progress Config</label>
+			<condition
+				class="com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition" />
+			<link linkId="jira_progress_configure_link">/secure/config.jspa</link>
+		</web-item>
+	
+		<customfield-type key="progress_field" name="synapseRT Progress Field"
+			class="com.atlassian.plugins.project.ProgressReleaseField">
+			<description>This field displays the list of available test cases.
+			</description>
+			<resource type="velocity" name="view"
+				location="templates/progress/view-progress_field.vm" />
+			<resource type="velocity" name="edit"
+				location="templates/progress/edit-progress_field.vm" />
+			<resource type="velocity" name="column-view"
+				location="templates/progress/col-progress_field.vm" />
+		</customfield-type>
+		
+		<customfield-searcher key="progress_field_searcher"
+			name="Progress Field Searcher"
+				class="com.atlassian.jira.issue.customfields.searchers.ExactTextSearcher">
+			<description>Searcher for Test Case States.</description>
+			<resource type="velocity" name="search"
+				location="templates/plugins/fields/edit-searcher/search-basictext.vm" />
+			<resource type="velocity" name="view"
+				location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm" />
+			<resource type="velocity" name="label"
+				location="templates/plugins/fields/view-searcher/label-searcher-basictext.vm" />
+				<valid-customfield-type package="com.atlassian.plugins.project"
+					key="progress_field" />
+		</customfield-searcher>
+		<customfield-type key="logged_hours_field" name="synapseRT Progress Field"
+			class="com.atlassian.plugins.project.LoggedHoursField">
+			<description>This field displays the list of available test cases.
+			</description>
+			<resource type="velocity" name="view"
+				location="templates/progress/view-logged_field.vm" />
+			<resource type="velocity" name="edit"
+				location="templates/progress/edit-logged_field.vm" />
+			<resource type="velocity" name="column-view"
+				location="templates/progress/col-logged_field.vm" />
+		</customfield-type>
+		
+		<customfield-searcher key="logged_hours_field_searcher"
+			name="Progress Field Searcher"
+				class="com.atlassian.jira.issue.customfields.searchers.ExactTextSearcher">
+			<description>Searcher for Hours Logged.</description>
+			<resource type="velocity" name="search"
+				location="templates/plugins/fields/edit-searcher/search-basictext.vm" />
+			<resource type="velocity" name="view"
+				location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm" />
+			<resource type="velocity" name="label"
+				location="templates/plugins/fields/view-searcher/label-searcher-basictext.vm" />
+				<valid-customfield-type package="com.atlassian.plugins.project"
+					key="logged_hours_field" />
+		</customfield-searcher>
+		<customfield-type key="estimated_hours_field" name="synapseRT Progress Field"
+			class="com.atlassian.plugins.project.EstimatedHoursField">
+			<description>This field displays the list of available test cases.
+			</description>
+			<resource type="velocity" name="view"
+				location="templates/progress/view-estimated_field.vm" />
+			<resource type="velocity" name="edit"
+				location="templates/progress/edit-estimated_field.vm" />
+			<resource type="velocity" name="column-view"
+				location="templates/progress/col-estimated_field.vm" />
+		</customfield-type>
+		
+		<customfield-searcher key="estimated_hours_field_searcher"
+			name="Progress Field Searcher"
+				class="com.atlassian.jira.issue.customfields.searchers.ExactTextSearcher">
+			<description>Searcher for Hours Logged.</description>
+			<resource type="velocity" name="search"
+				location="templates/plugins/fields/edit-searcher/search-basictext.vm" />
+			<resource type="velocity" name="view"
+				location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm" />
+			<resource type="velocity" name="label"
+				location="templates/plugins/fields/view-searcher/label-searcher-basictext.vm" />
+				<valid-customfield-type package="com.atlassian.plugins.project"
+					key="estimated_hours_field" />
+		</customfield-searcher>
+		
+		<webwork1 name="Global Progress Dashboard" key="GlobalProgressDashboardAction"
+			class="java.lang.Object">
+			<actions>
+				<action name="com.atlassian.plugins.project.ProjectDashboard"
+					alias="calculateProgressDashboard">
+					<view name="error" type="velocity">/templates/progress/maindashboard.vm
+					</view>
+					<view name="success" type="velocity">/templates/progress/maindashboard.vm
+					</view>
+					<view name="permissionviolation">/secure/views/permissionviolation.jsp</view>
+				</action>
+			</actions>
+		</webwork1>
+
+
+		<web-item key="progress-dashboard-main-link" name="Progress Dashboard Link"
+			section="system.top.navigation.bar" weight="45">
+			<label>Progress</label>
+			
+			<link linkId="progress-dashboard">/secure/ProgressMainDashboard.jspa</link>
+		</web-item>
+		
+		<web-section key="progress-dashboard-section" name="progress Dashboard Section"
+			location="progress-dashboard" weight="1">
+			<label>Progress</label>
+		</web-section>
+
+		<web-item key="progress-dashboard-secondary-link" name="progress Dashboard secondary link"
+			section="progress-dashboard/progress-dashboard-section" weight="1">
+		<label>Calculate Progress</label>
+			
+			<link linkId="progress-dashboard-secondary">/secure/calculateProgressDashboard.jspa</link>
+		</web-item>
+		
+		<servlet name='Project Progress Calculate Servlet'
+			key='calculate' class='com.atlassian.plugins.project.CalculateServlet'>
+			<url-pattern>/calculateServlet</url-pattern>
+		</servlet>
+	
+		
+</atlassian-plugin>

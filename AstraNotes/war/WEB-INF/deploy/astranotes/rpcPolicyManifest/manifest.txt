@@ -1,0 +1,3 @@
+# Module astranotes
+# RPC service class, partial path of RPC policy file
+com.astra.notes.app.client.GreetingService, 296C1413AD1EFB9F8C3B44833E0C35B3.gwt.rpc
