@@ -1,0 +1,44 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="confluence-roadmap"/>
+    <resource type="download" name="img/" location="/img"/>
+    <resource type="download" name="images/" location="/images"/>
+	<resource type="download" name="css/" location="css/" />
+
+    
+    <!-- add our web resources -->
+    <web-resource key="confluence-roadmap-resources" name="confluence-roadmap Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.acme.example.plugin:web-resource-key</dependency>
+        <resource type="download" name="style.css" location="/css/style.css"/>
+        <resource type="download" name="confluence-roadmap.js" location="/js/confluence-roadmap.js"/>
+
+        <context>confluence-roadmap</context>
+    </web-resource>
+    
+    <macro name="confluence-roadmap" class="com.confluence.plugin.roadmap.ExampleMacro" icon="/download/resources/${project.groupId}.${project.artifactId}/images/browserLogo.png" key="my-macro">
+    <description>com.confluence.plugin.roadmap</description>
+
+    
+    <parameters>
+</parameters>
+</macro>
+    
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    
+	<servlet name='Upload Servet'
+		key='uploadServlet'
+		class='com.confluence.plugin.roadmap.UploadServlet'>
+		<url-pattern>/uploadServlet</url-pattern>
+	</servlet>
+    
+</atlassian-plugin>

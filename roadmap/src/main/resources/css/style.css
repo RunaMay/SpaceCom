@@ -1,0 +1,141 @@
+body
+{
+	padding:0px;
+	margin:0px;
+	font-family:Tahoma, Geneva, sans-serif;
+	background-color:#FBFBF7;
+}
+h1
+{
+	margin-left:650px;
+	font-size:60px;
+}
+#img
+{
+	width:1080px;
+}
+button
+{
+	width:100px;
+	height:30px;
+	background-color:#AFC5C0;
+	border-radius:0px;
+}
+table
+{
+	margin-top:30px;
+	margin-left:10px;
+}
+#program
+{
+	background-image:url(../img/grad1.jpg);
+	font-size:22px;
+	padding:10px;
+	color:#828483;
+}
+#project
+{
+	background-color:#6dcff6;
+	font-size:26px;
+	padding:0px 40px;
+	border-bottom-left-radius:10px;
+	border-top-left-radius:10px;
+	color:#616161;
+	width:300px;
+	height:20px;
+}
+#months
+{
+	background-color:#616161;
+	padding:0px 40px;
+	font-size:16px;
+	color:#fff;
+}
+#future
+{
+	background-color:#6dcff6;
+	padding: 0px 50px;
+	font-size:26px;
+	border-bottom-right-radius:10px;
+	border-top-right-radius:10px;
+	color:#616161;
+}
+.closing
+{
+	border:9px solid #51b8e0;
+	background:#51b8e0;
+	width:1000px;
+	height:10px;
+	border-left:none;
+	border-right:none;
+}
+.onhold
+{
+	border:9px solid #666666;
+	background: #666666;
+	width:1000px;
+	height:10px;
+	border-left:none;
+	border-right:none;
+}
+.initiation
+{
+	border:9px solid #fee47e;
+	border-left:none;
+	border-right:none;
+	background:#fee47e;
+	width:1000px;
+	height:10px;
+}
+.execution
+{
+	border:9px solid #d4965d;
+	background:#d4965d;
+	border-left:none;
+	border-right:none;
+	width:1000px;
+	height:10px;
+}
+.launch
+{
+	border:9px solid #ae66bf;
+	border-left:none;
+	border-right:none;
+	background:#ae66bf;
+	width:1000px;
+	height:10px;
+}
+.idea
+{
+	border:9px solid #d0d3d4;
+	border-left:none;
+	border-right:none;
+	background:#d0d3d4;
+	width:1000px;
+	height:10px;
+}
+.approved
+{
+	border:9px solid #a0a0a0;
+	border-left:none;
+	border-right:none;
+    background: #a0a0a0;
+	width:1000px;
+	height:10px;
+}
+
+
+#arrow
+{
+	margin-top:-10px;
+}
+
+#table
+{
+	
+}
+
+#col
+{
+	padding:10px;
+}

@@ -1,0 +1,64 @@
+Manifest-Version: 1.0
+Atlassian-Build-Date: 2016-02-09T19:16:45+0200
+Bnd-LastModified: 1455038212147
+Build-Jdk: 1.8.0_45
+Built-By: Nazar
+Bundle-Description: Calculate Progress plugin
+Bundle-DocURL: http://www.mtc-solution.com/
+Bundle-ManifestVersion: 2
+Bundle-Name: Calculate Progress
+Bundle-SymbolicName: com.atlassian.plugins.project.calculate-project-rel
+ ease
+Bundle-Vendor: MTC Solution, Inc.
+Bundle-Version: 1.0.0
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: com.atlassian.upm.api.license;version="2.0.1",com
+ .atlassian.upm.api.license.entity;version="2.0.1",com.atlassian.upm.api
+ .util;version="2.0.1",com.atlassian.upm.license.storage.plugin;version=
+ "2.2.2"
+Import-Package: com.atlassian.event.api;resolution:=optional,com.atlassi
+ an.extras.common.log;resolution:=optional,com.atlassian.jira.bc.issue;r
+ esolution:=optional,com.atlassian.jira.component;resolution:=optional,c
+ om.atlassian.jira.config;resolution:=optional,com.atlassian.jira.config
+ .properties;resolution:=optional,com.atlassian.jira.issue;resolution:=o
+ ptional,com.atlassian.jira.issue.context;resolution:=optional,com.atlas
+ sian.jira.issue.customfields;resolution:=optional,com.atlassian.jira.is
+ sue.customfields.impl;resolution:=optional,com.atlassian.jira.issue.cus
+ tomfields.manager;resolution:=optional,com.atlassian.jira.issue.customf
+ ields.persistence;resolution:=optional,com.atlassian.jira.issue.fields;
+ resolution:=optional,com.atlassian.jira.issue.fields.config;resolution:
+ =optional,com.atlassian.jira.issue.fields.config.manager;resolution:=op
+ tional,com.atlassian.jira.issue.fields.layout.field;resolution:=optiona
+ l,com.atlassian.jira.issue.fields.screen;resolution:=optional,com.atlas
+ sian.jira.issue.index;resolution:=optional,com.atlassian.jira.issue.iss
+ uetype;resolution:=optional,com.atlassian.jira.project;resolution:=opti
+ onal,com.atlassian.jira.security;resolution:=optional,com.atlassian.jir
+ a.user;resolution:=optional,com.atlassian.jira.util;resolution:=optiona
+ l,com.atlassian.jira.util.json;resolution:=optional,com.atlassian.jira.
+ web.action;resolution:=optional,com.atlassian.plugin;resolution:=option
+ al,com.atlassian.plugin.event.events;resolution:=optional,com.atlassian
+ .plugin.webresource;resolution:=optional,com.atlassian.sal.api;resoluti
+ on:=optional,com.atlassian.sal.api.lifecycle;resolution:=optional,com.a
+ tlassian.sal.api.pluginsettings;resolution:=optional,com.atlassian.sal.
+ api.scheduling;resolution:=optional,com.atlassian.sal.api.transaction;r
+ esolution:=optional,com.atlassian.sal.api.user;resolution:=optional,com
+ .atlassian.upm.api.license;resolution:=optional,com.atlassian.upm.api.l
+ icense.entity;resolution:=optional,com.atlassian.upm.api.util;resolutio
+ n:=optional,com.atlassian.upm.license.storage.plugin;resolution:=option
+ al,com.google.common.base;resolution:=optional,com.google.common.collec
+ t;resolution:=optional,com.opensymphony.util;resolution:=optional,javax
+ .annotation;resolution:=optional,javax.servlet;resolution:=optional,jav
+ ax.servlet.http;resolution:=optional,net.jcip.annotations;resolution:=o
+ ptional,org.apache.commons.io;resolution:=optional,org.apache.commons.l
+ ang;resolution:=optional,org.apache.tools.ant;resolution:=optional,org.
+ apache.tools.ant.types;resolution:=optional,org.joda.time;resolution:=o
+ ptional,org.ofbiz.core.entity;resolution:=optional,org.osgi.framework;r
+ esolution:=optional,org.osgi.util.tracker;resolution:=optional,org.slf4
+ j;resolution:=optional,org.springframework.beans;resolution:=optional,o
+ rg.springframework.beans.factory;resolution:=optional,org.springframewo
+ rk.beans.factory.config;resolution:=optional,org.springframework.contex
+ t;resolution:=optional,org.springframework.osgi.context;resolution:=opt
+ ional
+Originally-Created-By: Apache Maven Bundle Plugin
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-2.4.1.201501161923

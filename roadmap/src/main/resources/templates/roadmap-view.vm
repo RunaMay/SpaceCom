@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Road Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <![CDATA[
+           #requireResource("com.acme.example.plugin:web-resource-key")
+ ]]>
+   
+   <script>
+	function myFunction()
+	{
+		var x = document.getElementById("mySelect").value;
+		if(x=="Date")
+		{
+			document.getElementById("D").style.display="block";
+			document.getElementById("P").style.display="none";
+		}
+		else if(x=="Program Name")
+		{
+			document.getElementById("D").style.display="none";
+			document.getElementById("P").style.display="block";
+		}
+		else
+		{
+			document.getElementById("D").style.display="block";
+			document.getElementById("P").style.display="block";
+		}
+	}
+</script>
+        <link type="text/css" rel="StyleSheet" href="/download/resources/confluence.roadmap/css/style.css"/>
+    
+</head>
+
+<body>
+        <link type="text/css" rel="StyleSheet" href="/download/resources/confluence.roadmap/css/style.css"/>
+
+	<div id="img">
+    <h1>ROADMAP</h1>
+    <h3>Project Phases</h3>
+    <div id="img">
+    <img src="/download/resources/confluence.roadmap/img/idea.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/approved.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/initiation.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/execution.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/launch.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/closing.png" width="150" height="30">
+    <img src="/download/resources/confluence.roadmap/img/onhold.png" width="150" height="30">
+    </br></br>
+    
+    <div style="margin-left:20px">
+  
+  Filter By:<select id="mySelect" onchange="myFunction()">
+            <option value="Date">Date
+            <option value="Program Name">Program Name
+            <option value="Both">Both
+            </select>
+            
+           
+           <div id="D" >
+           </br>
+            	 From <input type="date"/> To:<input type="date"/>
+            </div>
+            
+           <div id="P" style="display:none">
+           </br>
+             Program Name:<select>
+                            <option>Program 1</option>
+                            <option>Program 2</option>
+                            <option>Program 3</option>
+                          </select>
+            </div>
+             </br>
+            <button>Filter</button>
+            </div>
+            
+          </div>
+
+<div id="table">
+    <table rules="cols" >
+        <tr>
+            <th id="project">PROJECT DETAILS</th>
+            <th id="months">JAN 2015</th>
+            <th id="months">FEB 2015</th>
+            <th id="months">MAR 2015</th>
+            <th id="months">APR 2015</th>
+            <th id="months">MAY 2015</th>
+            <th id="months">JUN 2015</th>
+            <th id="future">FUTURE</th>
+        </tr>
+        
+        <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+        <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+        <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+        
+        <!--------------------------------------------Program1------------------------------------------------------------->
+        #foreach ($program in $programsList)
+
+        <tr>
+            <th id="program"></th>
+            <th id="program"></th>
+            <th id="program"></th>
+            <th id="program">$program</th>
+            <th id="program"></th>
+            <th id="program"></th>
+            <th id="program"></th>
+            <th id="program"></th>
+        </tr>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        #foreach ($project in $projectsByProgram.get($program))
+ <tr class="rowNormal" style="vertical-align: text-top;">
+       
+ 
+ <td id="col"><h4>$project.getProjectName()
+ 
+    <td id="col" colspan="6">
+     
+                <div class="$project.getProjectPhase().toLowerCase()" style="width:$project.getPercentageComplete()">
+                 #foreach ($color in $project.getDelayReason())
+            		<img src="/download/resources/confluence.roadmap/img/$color" width="22" height="29" id="arrow" style="background:inherit;"/>
+         	  	   
+                    
+         #end
+                </div>
+              
+     </td>
+  
+ </tr>
+ #end 
+        
+        
+    
+         #end
+       
+      </table>
+      </div>
+      </body>
+</html>
